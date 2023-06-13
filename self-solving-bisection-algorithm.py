@@ -1,6 +1,8 @@
 import random
 import sys
 import os
+import time
+
 from machine_art import logo
 
 EASY_MODE = 10
@@ -12,6 +14,19 @@ def guessing(lives):
     Lives Counter: - 1"
     """
     return lives - 1
+
+
+def delay():
+    """
+    Delays the prompt for a more dramatic effect
+    """
+    time.sleep(0.5)
+    print(". ", end="")
+    time.sleep(0.5)
+    print(". ", end="")
+    time.sleep(0.5)
+    print(".")
+    time.sleep(1)
 
 
 def difficulty():
@@ -43,9 +58,11 @@ def bisection_algorithm(target, epsilon, lives):
 
     while abs(guess - target) >= epsilon:
         if guess < target:
+            delay()
             print(f"'The Machine' guessed: {guess}. Too low.")
             low = guess
         else:
+            delay()
             print(f"'The Machine' guessed: {guess}. Too high.")
             high = guess
         guess = (high + low) // 2
@@ -53,11 +70,13 @@ def bisection_algorithm(target, epsilon, lives):
         lives = guessing(lives)
 
         if lives == 0:
-            print("'The Machine' loses.")
+            time.sleep(1)
+            print("\n'The Machine' loses.")
             break
 
     if lives != 0:
-        print(f"'The Machine' guessed: {guess}. 'The Machine' congratulates itself, correct number!")
+        time.sleep(1)
+        print(f"\n'The Machine' guessed: {guess}. 'The Machine' congratulates itself, correct number!")
     return guess
 
 
